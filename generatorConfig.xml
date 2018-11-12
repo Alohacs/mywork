@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	
+    <properties resource="jdbc.properties" />  
+    
+    <!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 -->  
+    <classPathEntry location="D:\WorkSpace\ssm-2\ssmtest2\WebRoot\WEB-INF\lib\mysql-connector-java-5.1.22-bin.jar" />  
+    
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+		
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+                
+        <!-- 数据库链接URL，用户名、密码 -->
+        <jdbcConnection connectionURL="${jdbc.url}" driverClass="${jdbc.driverClass}"
+            password="${jdbc.password}" userId="${jdbc.user}" />
+        
+        <!-- 指定JDBC和Java类型转换 -->  
+        <javaTypeResolver>  
+            <!-- 是否使用bigDecimal，默认为false false可自动转化以下类型（Long, Integer, Short, etc.） --> 
+            <property name="forceBigDecimals" value="false" />  
+        </javaTypeResolver>  
+        
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="${package.model}" targetProject="${targetProject}">
+            <property name="constructorBased" value="true" />
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+            <!-- <property name="rootClass" value="com.ajs.base.BaseEntity" /> -->
+        </javaModelGenerator>
+        
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="${package.sql.mapper}" targetProject="${targetProject}">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator targetPackage="${package.dao.mapper}" targetProject="${targetProject}" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>       
+        
+        <!-- 要生成的表 tableName 是数据库中的表名或视图名 domainObjectName 是实体类名 -->
+		<table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="userId" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="power" domainObjectName="Power" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="powerId" sqlStatement="Mysql" identity="true" />
+		</table>
+		
+		<table tableName="result" domainObjectName="ai_result" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		
+    </context>
+    
+</generatorConfiguration>
